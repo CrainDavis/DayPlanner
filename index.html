@@ -33,7 +33,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>9 AM</span>
+          <span class="hour"><br /><br />9 AM</span>
         </div>
         <div class="col-9">
           <textarea id="9" type="text" class="description"></textarea>
@@ -47,7 +47,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>10 AM</span>
+          <span class="hour"><br /><br />10 AM</span>
         </div>
         <div class="col-9">
           <textarea id="10" type="text" class="description"></textarea>
@@ -61,7 +61,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>11 AM</span>
+          <span class="hour"><br /><br />11 AM</span>
         </div>
         <div class="col-9">
           <textarea id="11" type="text" class="description"></textarea>
@@ -75,7 +75,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>12 PM</span>
+          <span class="hour"><br /><br />12 PM</span>
         </div>
         <div class="col-9">
           <textarea id="12" type="text" class="description"></textarea>
@@ -89,7 +89,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>1 PM</span>
+          <span class="hour"><br /><br />1 PM</span>
         </div>
         <div class="col-9">
           <textarea id="13" type="text" class="description"></textarea>
@@ -103,7 +103,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>2 PM</span>
+          <span class="hour"><br /><br />2 PM</span>
         </div>
         <div class="col-9">
           <textarea id="14" type="text" class="description"></textarea>
@@ -117,7 +117,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>3 PM</span>
+          <span class="hour"><br /><br />3 PM</span>
         </div>
         <div class="col-9">
           <textarea id="15" type="text" class="description"></textarea>
@@ -131,7 +131,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>4 PM</span>
+          <span class="hour"><br /><br />4 PM</span>
         </div>
         <div class="col-9">
           <textarea id="16" type="text" class="description"></textarea>
@@ -145,7 +145,7 @@
 
       <div class="time-block row no-gutters">
         <div class="col-1">
-          <span class="hour"><br><br>5 PM</span>
+          <span class="hour"><br /><br />5 PM</span>
         </div>
         <div class="col-9">
           <textarea id="17" type="text" class="description"></textarea>
@@ -157,59 +157,67 @@
         </div>
       </div>
 
-      <br><br>
-
+      <br /><br />
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script>
       $(document).ready(function() {
-        // display current date on page top
-        var currentDay = $("#currentDay");
-        currentDay.text(moment().format("MMMM Do YYYY, h:mm a"));
+        // display current date on page top using moment.js library
+        var currentDateTime = $("#currentDay");
+        currentDateTime.text(moment().format("MMMM Do YYYY, h:mm a"));
 
-        // creates the text area within the container div
-        var values = $(".container div").map(function() {
-            return $(this).children("textarea").prop("id");
-        })
-        .get();
+        // create the text area within the container div
+        var textInput = $(".container div")
+          .map(function() {
+            return $(this)
+              .children("textarea")
+              .prop("id");
+          })
+          .get();
 
-        // adds color to timeblocks based on current time
-        function addColor() {
+        // add color to time-blocks based on the current time in moment.js library
+        function showTimeColor() {
           var currentTime = parseInt(moment().format("H"));
 
-          values.forEach(function(element) {
-            if (parseInt(element) < currentTime) {
-              $("#" + element).parent().addClass("past");
-            } else if (parseInt(element) === currentTime) {
-              $("#" + element).parent().addClass("present");
+          textInput.forEach(function(userEvent) {
+            if (parseInt(userEvent) < currentTime) {
+              $("#" + userEvent)
+                .parent()
+                .addClass("past");
+            } else if (parseInt(userEvent) === currentTime) {
+              $("#" + userEvent)
+                .parent()
+                .addClass("present");
             } else {
-              $("#" + element).parent().addClass("future");
+              $("#" + userEvent)
+                .parent()
+                .addClass("future");
             }
           });
         }
 
-        // access local storage for any saved tasks
+        // when application is opened; access local storage for any saved tasks
         function startApp() {
-          values.forEach(function(element) {
-            $("#" + element).text(localStorage.getItem(element));
+          textInput.forEach(function(userEvent) {
+            $("#" + userEvent).text(localStorage.getItem(userEvent));
           });
         }
 
-        // store user's tasks to local storage
+        // store user's newly-input tasks to local storage
         function saveUserEvent() {
-          values.forEach(function(btnNumber) {
+          textInput.forEach(function(btnNumber) {
             $("#btn" + btnNumber).on("click", function() {
               localStorage.setItem(btnNumber, $.trim($("#" + btnNumber).val()));
             });
           });
         }
-        
+
         // call functions
         startApp();
 
-        addColor();
+        showTimeColor();
 
         saveUserEvent();
       });
