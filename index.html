@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, startAppial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
       rel="stylesheet"
@@ -191,14 +191,14 @@
         }
 
         // access local storage for any saved tasks
-        function init() {
+        function startApp() {
           values.forEach(function(element) {
             $("#" + element).text(localStorage.getItem(element));
           });
         }
 
         // store user's tasks to local storage
-        function storeTasks() {
+        function saveUserEvent() {
           values.forEach(function(btnNumber) {
             $("#btn" + btnNumber).on("click", function() {
               localStorage.setItem(btnNumber, $.trim($("#" + btnNumber).val()));
@@ -207,11 +207,11 @@
         }
         
         // call functions
-        init();
+        startApp();
 
         addColor();
 
-        storeTasks();
+        saveUserEvent();
       });
     </script>
   </body>
