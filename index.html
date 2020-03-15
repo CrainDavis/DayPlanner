@@ -168,36 +168,31 @@
         var currentDateTime = $("#currentDay");
         currentDateTime.text(moment().format("MMMM Do YYYY, h:mm a"));
 
-        // create the variable for the text areas
+        // add color to each of the time-blocks based on the current time in moment.js library
+        function showTimeColor() {
+          var currentTime = parseInt(moment().format("H"));
+          var timeBlockArray = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
+
+          for (var i = 0; i < timeBlockArray.length; i++) {
+            if (parseInt(timeBlockArray[i]) < currentTime) {
+              $("#" + timeBlockArray[i]).addClass("past");
+            } else if (parseInt(timeBlockArray[i]) === currentTime) {
+              $("#" + timeBlockArray[i]).addClass("present");
+            } else {
+              $("#" + timeBlockArray[i]).addClass("future");
+            }
+          };
+        }
+
+        // create variable containing input content of the text areas (for local storage)
         var userInputArea = $(".userInputArea").map(function() {
             return $(this).children("textarea").prop("id");
         }).get();
 
-        // add color to each of the time-blocks based on the current time in moment.js library
-        function showTimeColor() {
-          var currentTime = parseInt(moment().format("H"));
-
-          userInputArea.forEach(function(userEvent) {
-            if (parseInt(userEvent) < currentTime) {
-              $("#" + userEvent)
-                .parent()
-                .addClass("past");
-            } else if (parseInt(userEvent) === currentTime) {
-              $("#" + userEvent)
-                .parent()
-                .addClass("present");
-            } else {
-              $("#" + userEvent)
-                .parent()
-                .addClass("future");
-            }
-          });
-        }
-
         // when application is opened; access local storage for any saved tasks
         function startApp() {
-          userInputArea.forEach(function(userEvent) {
-            $("#" + userEvent).text(localStorage.getItem(userEvent));
+          userInputArea.forEach(function(userTask) {
+            $("#" + userTask).text(localStorage.getItem(userTask));
           });
         }
 
