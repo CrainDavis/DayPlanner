@@ -161,6 +161,8 @@ https://www.contributor-covenant.org/translations.
 ---
 
 ## Resources:
+* [jQuery](https://jquery.com/)
+* [Moment.js library](https://momentjs.com/)
 
 ---
 
