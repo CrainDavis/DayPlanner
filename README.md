@@ -163,12 +163,3 @@ https://www.contributor-covenant.org/translations.
 ## Resources:
 * [jQuery](https://jquery.com/)
 * [Moment.js library](https://momentjs.com/)
-
----
-
-## Questions: 
-for any questions, please contact:
-
-![CrainDavis](https://avatars0.githubusercontent.com/u/59345254?v=4) 
-
-__[CrainDavis](https://github.com/CrainDavis)__ at chyna.davis11@gmail.com
